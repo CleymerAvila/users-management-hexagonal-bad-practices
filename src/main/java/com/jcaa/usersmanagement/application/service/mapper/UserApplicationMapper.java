@@ -47,7 +47,7 @@ public class UserApplicationMapper {
 
     // Clean Code - Regla 24: mismo concepto que "correo" de arriba, pero renombrado
     // sin razón a "correoElectronico". El lector no puede saber si son conceptos distintos.
-    final String correoElectronico = command.email();
+    final String correo = command.email();
 
     // EFECTO CASCADA de la Regla 15 en UserModel:
     // Al usar @Data en vez de @Value, el modelo es mutable. El siguiente llamador
@@ -56,7 +56,7 @@ public class UserApplicationMapper {
     return new UserModel(
         new UserId(command.id()),
         new UserName(command.name()),
-        new UserEmail(correoElectronico),
+        new UserEmail(correo),
         passwordToUse,
         UserRole.fromString(command.role()),
         UserStatus.fromString(command.status()));
