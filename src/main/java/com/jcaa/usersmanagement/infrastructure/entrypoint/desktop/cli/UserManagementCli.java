@@ -61,7 +61,7 @@ public final class UserManagementCli {
     } catch (final ConstraintViolationException exception) {
       console.println("  Validation errors:");
       exception.getConstraintViolations()
-          .forEach(violation -> console.println("    - " + violation.getMessage()));
+          .forEach(violation -> console.println("    - " + violation.getPropertyPath() + " " + violation.getMessage()));
     } catch (final RuntimeException exception) {
       console.println("  Unexpected error: " + exception.getMessage());
     }
