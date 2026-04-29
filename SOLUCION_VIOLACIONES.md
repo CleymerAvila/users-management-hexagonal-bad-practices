@@ -14,6 +14,14 @@ LoginCommand, UpdateUserCommand, GetUserByIdQuery
 
 - Se evitó la redundancia eliminando la anotación @Builder en los recors, CreateUserCommand.java y GetUserByIdQuery.java
 
+### VIOLACIÓN REGLA 6
+
+- La regla 6 de buenas prácticas java y arquitectura hexagonal nos dice que el bloque try-catch debe ser usado si hay
+recuperación de lo contrario se dirija al manejador de excepciones global. No se debe loggear PII ni se debe hacer loggin
+en la capa dominio
+
+- Se eliminó el email del usuario (PII) dentro de los logs de los archivos DeleUserService.java, LogginHandler, y se
+eliminó el logger del value object userEmail dentro de la capa dominio
 
 ## VIOLACIONES REGLA 2 (Clean Code)
 

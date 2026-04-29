@@ -161,7 +161,7 @@ public final class UserRepositoryMySQL
   }
 
   @Override
-  public void delete(final UserId userId) {
+  public void delete(final UserId userId)  throws PersistenceException {
     try (final PreparedStatement statement = connection.prepareStatement(SQL_DELETE)) {
       statement.setString(1, userId.value());
       statement.executeUpdate();
