@@ -1,6 +1,8 @@
 package com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.io;
 
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.dto.UserResponse;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +31,11 @@ public final class UserResponsePrinter {
     // esta llamada a users.isEmpty() lanza NullPointerException en tiempo de ejecución.
     // Ningún método debe retornar null — se deben usar colecciones vacías.
     if (users.isEmpty()) {
-      console.println("  No users found.");
-      return;
+      console.printf("%n No hay usuarios encontrados, Total: %d users(s)%n", 0);
+    } else {
+        console.printf("%n  Total: %d user(s)%n", users.size());
+        users.forEach(this::print);
     }
-    console.printf("%n  Total: %d user(s)%n", users.size());
-    users.forEach(this::print);
   }
 
   // Clean Code - Regla 27 (código listo para leer, no solo para compilar):

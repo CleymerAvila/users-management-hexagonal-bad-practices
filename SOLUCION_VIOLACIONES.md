@@ -36,6 +36,29 @@ UserRepositoryMySQL.java.
 - Se marcó como con la anotación @UtilityClass para evitar su instanciacion en la clases ValidatorProvider.java, 
 DatabaseConnectionFactory.java
 
+### VIOLACIÓN REGLA 5
+
+- ningun metodo debe devolver null
+
+- se cambio la implementación de los metodos dentro de GetAllUsersService.java y UserResponsePrinter para retornar
+listas vacias en lugar de null
+
+pasando de esto
+
+``` Java
+if (users.isEmpty()) {
+      return null;
+    }
+    return users;
+```
+a esto
+``` Java
+if (users.isEmpty()) {
+      return Collections.emptyList();
+    }
+    return users;
+```
+
 
 ### VIOLACIÓN REGLA 6
 
