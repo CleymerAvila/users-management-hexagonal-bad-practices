@@ -3,6 +3,8 @@ package com.jcaa.usersmanagement;
 import com.jcaa.usersmanagement.infrastructure.config.DependencyContainer;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.UserManagementCli;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.io.ConsoleIO;
+import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.controller.UserController;
+
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -31,10 +33,28 @@ public final class Main {
   // Cada una de estas responsabilidades podría extraerse a un método con nombre claro:
   //   buildContainer(), buildConsole(), buildCli(), run().
   public static void main(final String[] args) {
-    log.info("Starting Users Management System...");
-    final DependencyContainer container = new DependencyContainer();
-    try (final Scanner scanner = new Scanner(System.in)) {
-      new UserManagementCli(container.userController(), new ConsoleIO(scanner, System.out)).start();
-    }
+    run();
+  }
+
+  public static void run(){
+      log.info("Starting Users Management System...");
+      var container = buildContainer();
+      try (final Scanner scanner = new Scanner(System.in)) {
+          var console = buildConsole(scanner);
+          var userCli = buildCli(container.userController(), console);
+          userCli.start();
+      }
+  }
+
+  private static DependencyContainer buildContainer(){
+      return new DependencyContainer();
+  }
+
+  private static UserManagementCli buildCli(final UserController userController, final ConsoleIO consoleIO){
+      return new UserManagementCli(userController, consoleIO);
+  }
+
+  private static ConsoleIO buildConsole(final Scanner scanner){
+      return new ConsoleIO(scanner, System.out);
   }
 }

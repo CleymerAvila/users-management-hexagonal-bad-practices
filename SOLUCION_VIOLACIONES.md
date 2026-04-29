@@ -71,6 +71,21 @@ eliminó el logger del value object userEmail dentro de la capa dominio
 
 ## VIOLACIONES REGLA 2 (Clean Code)
 
+
+### VIOLACIÓN REGLA 1 (Funciones cortas y responsabilidad única)
+
+- Se separó el metodo `execute` de la clase CreateUserService en 3 metodos diferentes con responsabilidades únicas,
+`createUser()` `validateConstrainsts()` y `createUserFromCommand`
+
+
+- Se dividio el metodo `execute` de la clase LoginService para mayor cohesión y desacople de codigo y responsabilidades
+unicas: `getAndValidateUser()`, `validateCommand()`, `searchUserFromEmail()`, `validateUserStatus()` y `verifyUserPassword()` 
+
+- Se dividió el método main de la clase principal Main.class y salida de la aplicación para separar las responsabilidades
+unicas dentro del metodo y solo ejecutar un solo flujo dentro del main, separando las ejecuciones en los siguientes 
+metodos `builContainer()`, `buildConsole()`, `buildCli()` y `run()`
+
+
 ### VIOLACIÓN REGLA 24 (Consistencia semántica)
 -   Usar los mismos términos para los mismos conceptos.
 -   Mantener coherencia en nombres y estructuras.
