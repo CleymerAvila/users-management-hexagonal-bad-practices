@@ -14,6 +14,29 @@ LoginCommand, UpdateUserCommand, GetUserByIdQuery
 
 - Se evitó la redundancia eliminando la anotación @Builder en los recors, CreateUserCommand.java y GetUserByIdQuery.java
 
+
+### VIOLACIÓN REGLA 4
+
+- La regla 4 nos dice que debemos nombrar variables sin abreviaturas y deben ser claros,
+evitar el operador == null al hacer comparaciones y usar `Objects.isNull()` o `Objects.isEquals()` en su lugar, realizar
+imports especificos y evitar la wildcard (*), definir como statics los metodos sin estados y definir las clases
+utilitaris como @UtilityClass para evitar su instancia.
+
+- Se remplazó el operador == null con el Objects.isNull() en los archivos AppProperties.java, EmailDestinationModel.java,
+UserId.java, UserName.java, UserPassword.java
+
+- Se renombró variables abreviadas poco claras en los archivos AppProperties.java, UpdateUserHandler.java, 
+UserController.java, UserManagementCli.java
+
+- Se establecio metodos sin estados como metodos estaticos en los archivos DatabaseConnectionFactory.java,
+EmailNotificationService.java y UserPersistentMapper.java. Y tambien se cambio su implementación y llamada estatica
+a esos metodos en los archivos DatabaseConnectionFactoryTest.java, DependencyContainer.java, UserPersistenceMapperTest,
+UserRepositoryMySQL.java.
+
+- Se marcó como con la anotación @UtilityClass para evitar su instanciacion en la clases ValidatorProvider.java, 
+DatabaseConnectionFactory.java
+
+
 ### VIOLACIÓN REGLA 6
 
 - La regla 6 de buenas prácticas java y arquitectura hexagonal nos dice que el bloque try-catch debe ser usado si hay
