@@ -3,17 +3,17 @@
 ## VIOLACIONES REGLAS 1 (Arquitectura Hexagonal)
 
 
-- VIOLACIÓN REGLA 3
+### VIOLACIÓN REGLA 3
 
-La regla 3 nos dice que no debemos personalizar los mensajes
+- La regla 3 nos dice que no debemos personalizar los mensajes
 de las validaciones dentro de los records, dejando los mensajes
-por defectos con eliminando el atributo message= en los siguientes archivos
+por defectos con eliminando el atributo message= en los siguientes archivos: CreateUserCommand, DeleteUserCommand, 
+LoginCommand, UpdateUserCommand, GetUserByIdQuery
 
-- application/service/dto/command/CreateUserCommand.java
-- application/service/dto/command/DeleteUserCommand.java
-- application/service/dto/command/LoginCommand.java
-- application/service/dto/command/UpdateUserCommand.java
-- application/service/dto/query/GetUserByIdQuery.java
+- Se eliminó la constraints y validación @Valid en la implementación de GetUserByIdService
+
+- Se evitó la redundancia eliminando la anotación @Builder en los recors, CreateUserCommand.java y GetUserByIdQuery.java
+
 
 ## VIOLACIONES REGLA 2 (Clean Code)
 
