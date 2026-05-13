@@ -69,6 +69,15 @@ en la capa dominio
 - Se eliminó el email del usuario (PII) dentro de los logs de los archivos DeleUserService.java, LogginHandler, y se
 eliminó el logger del value object userEmail dentro de la capa dominio
 
+
+### VIOLACIÓN REGLA 7 
+- La regla 7 de buenas practicas java y arquitectura hexagonal nos habla de los mappers, 
+los cuales deben ser usados entre capas y usar mapStruct para evitar mappers manuales
+
+- Se creo una interfaz `UserObjectsMapper.java` para usar mapStruct y centralizar el mapeo entre los objetos de java
+usando campos mapeados y métodos para transformar value objects y enums. Y se integro con la clase `UserPersistenceMapper.java`
+que hace transformaciones usando el mapper de mapStruct y métodos manuales usando jdbc
+
 ## VIOLACIONES REGLA 2 (Clean Code)
 
 

@@ -9,6 +9,7 @@ import com.jcaa.usersmanagement.domain.valueobject.UserName;
 import com.jcaa.usersmanagement.domain.valueobject.UserPassword;
 import com.jcaa.usersmanagement.infrastructure.adapter.persistence.dto.UserPersistenceDto;
 import com.jcaa.usersmanagement.infrastructure.adapter.persistence.entity.UserEntity;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ import java.util.List;
 // única librería de mapeo). Al escribir mappers manualmente se crea una clase "utilitaria"
 // cuya lógica debería estar generada automáticamente, no dispersa en código manual.
 // Una clase UserPersistenceMapper escrita a mano es señal de lógica mal ubicada.
+
 @UtilityClass
 public class UserPersistenceMapper {
 
@@ -34,15 +36,7 @@ public class UserPersistenceMapper {
     // para extraer el String. El mapper no debería acceder a los internals del value object;
     // debería existir un método user.getIdValue() o delegarse al propio objeto.
     // La Ley de Deméter dice: habla solo con tus amigos directos, no con los amigos de tus amigos.
-    return new UserPersistenceDto(
-        user.getId().value(),
-        user.getName().value(),
-        user.getEmail().value(),
-        user.getPassword().value(),
-        user.getRole().name(),
-        user.getStatus().name(),
-        null,
-        null);
+    return UserObjectsMapper.INSTANCE.fromModelToUserPersistenceDto(user);
   }
 
   public static UserEntity fromResultSetToEntity(final ResultSet resultSet) throws SQLException {
@@ -58,17 +52,11 @@ public class UserPersistenceMapper {
   }
 
   public static UserModel fromEntityToModel(final UserEntity entity) {
-    return new UserModel(
-        new UserId(entity.id()),
-        new UserName(entity.name()),
-        new UserEmail(entity.email()),
-        UserPassword.fromHash(entity.password()),
-        UserRole.fromString(entity.role()),
-        UserStatus.fromString(entity.status()));
+    return UserObjectsMapper.INSTANCE.fromEntityToModel(entity);
   }
 
   public static UserModel fromResultSetToModel(final ResultSet resultSet) throws SQLException {
-    return fromEntityToModel(fromResultSetToEntity(resultSet));
+    return UserObjectsMapper.INSTANCE.fromEntityToModel(fromResultSetToEntity(resultSet));
   }
 
   public static List<UserModel> fromResultSetToModelList(final ResultSet resultSet) throws SQLException {
