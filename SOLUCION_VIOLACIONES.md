@@ -76,7 +76,15 @@ los cuales deben ser usados entre capas y usar mapStruct para evitar mappers man
 
 - Se creo una interfaz `UserObjectsMapper.java` para usar mapStruct y centralizar el mapeo entre los objetos de java
 usando campos mapeados y métodos para transformar value objects y enums. Y se integro con la clase `UserPersistenceMapper.java`
-que hace transformaciones usando el mapper de mapStruct y métodos manuales usando jdbc
+que hace transformaciones usando el mapper de mapStruct y métodos manuales usando jdbc.
+
+
+### VIOLACIÓN REGLA 9
+- La regla 9 nos habla sobre la dependencia sobre el domino las buenas practicas para aplicar solid y patrones
+
+- dentro de la clase `UserController` se realizaban multiples violaciones a la regla 9 de arquitectura hexagonal
+haciendo uso de metodos de dominios sin usar el mapper porlo que para realizar acciones que involucren la capa dominio
+se uso el mapper para que actue como puente entre entrypoint y el dominio.
 
 ## VIOLACIONES REGLA 2 (Clean Code)
 
